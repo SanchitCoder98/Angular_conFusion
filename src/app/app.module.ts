@@ -3,25 +3,35 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { FormsModule } from '@angular/forms';
+
 import {MatToolbarModule} from '@angular/material/toolbar';
-import 'hammerjs';
-import { MenuComponent } from './menu/menu.component';
 import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import { DishdetailComponent } from './dishdetail/dishdetail.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+import 'hammerjs';
+
 import { DishService } from './services/dish.service';
+import { PromotionService } from './services/promotion.service';
+import { LeaderService } from './services/leader.service';
+
+import { MenuComponent } from './menu/menu.component';
+import { DishdetailComponent } from './dishdetail/dishdetail.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-import { AppRoutingModule } from './app-routing/app-routing.module';
-import { PromotionService } from './services/promotion.service';
-import { LeaderService } from './services/leader.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +42,8 @@ import { LeaderService } from './services/leader.service';
     FooterComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -45,9 +56,17 @@ import { LeaderService } from './services/leader.service';
     MatButtonModule,
     MatIconModule,
     AngularFontAwesomeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCheckboxModule
   ],
   providers: [ DishService, PromotionService, LeaderService ],
+  entryComponents: [
+    LoginComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
