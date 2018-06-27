@@ -30,14 +30,51 @@
   </div>
 
   <div fxFlex="40" *ngIf="dish">
-    <mat-list fxFlex>
-        <h2>Comments</h2>
-      <mat-list-item *ngFor="let sub of dish.comments">
-        <p matLine>{{sub.comment}}</p>
-        <p matLine>{{sub.rating}} stars</p>
-        <p matLine>--{{sub.date | date}}</p>
-      </mat-list-item>
-    </mat-list>
+    <div fxLayout="column">
+      <mat-list fxFlex>
+          <h2>Comments</h2>
+        <mat-list-item *ngFor="let sub of dish.comments">
+          <p matLine>{{sub.comment}}</p>
+          <p matLine>{{sub.rating}} stars</p>
+          <p matLine>--{{sub.author}},{{sub.date | date}}</p>
+        </mat-list-item>
+      </mat-list>
+
+      <div fxFlex>
+        <div [hidden]="feedbackForm.invalid">
+            <mat-list>
+                <mat-list-item>
+                  <p matLine>{{feedbackForm.value.comment}}</p>
+                  <p matLine>{{feedbackForm.value.rating}} stars</p>
+                  <p matLine>--{{feedbackForm.value.name}}</p>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="name" placeholder="Name" type="text" required>
+              <mat-hint>
+                  <span [hidden]="!(formErrors.name)">
+                    {{formErrors.name}}</span>
+                </mat-hint>
+            </mat-form-field>
+            <table>
+              <td>
+                <p>Rating</p>
+                <mat-slider thumbLabel tickInterval='1' min='1' max='5' formControlName="rating" value="5" ></mat-slider>
+              </td>
+            </table>
+            <mat-form-field class="full-width">
+              <textarea matInput formControlName="comment" placeholder="Your Feedback" rows=12 required></textarea>
+              <mat-hint>
+                <span [hidden]="!(formErrors.comment)">
+                  {{formErrors.comment}}</span>
+              </mat-hint>
+            </mat-form-field>
+            <button type="submit"  [disabled]="feedbackForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
+        </form>
+      </div>
+    </div>
   </div>
 
   <div [hidden]="dish">
