@@ -7,6 +7,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
@@ -25,9 +26,12 @@ import {MatSliderModule} from '@angular/material/slider';
 
 import 'hammerjs';
 
+import { baseURL } from './shared/baseurl';
+
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 import { MenuComponent } from './menu/menu.component';
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
@@ -71,9 +75,13 @@ import { LoginComponent } from './login/login.component';
     MatSelectModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    HttpClientModule
   ],
-  providers: [ DishService, PromotionService, LeaderService ],
+  providers: [ 
+    DishService, PromotionService, LeaderService, ProcessHTTPMsgService,
+    {provide: 'BaseURL', useValue: baseURL}
+   ],
   entryComponents: [
     LoginComponent
   ],
