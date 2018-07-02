@@ -24,6 +24,7 @@ export class DishdetailComponent implements OnInit {
   prev: number;
   next: number;
   errMess: String;
+  dishcopy = null;
   
   formErrors = {
     'name': '',
@@ -52,7 +53,7 @@ export class DishdetailComponent implements OnInit {
     this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds,
       errmess => this.errMess = <any>errmess.message);
     this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(+params['id'])))
-    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); }, errmess => this.errMess = <any>errmess.message);
+    .subscribe(dish => { this.dish = dish; this.dishcopy = dish ;this.setPrevNext(dish.id); }, errmess => this.errMess = <any>errmess.message);
   }
 
   createForm()
@@ -77,8 +78,9 @@ export class DishdetailComponent implements OnInit {
       author: this.feedbackForm.value.name,
       date: new Date().toISOString()
     }
-    this.dish.comments.push(this.comment);
-    console.log(this.comment);
+
+    this.dishcopy.comments.push(this.comment);
+    this.dishcopy.save().subscribe(dish => { this.dish = dish; console.log(this.dish); });
     this.feedbackForm.reset({
       name:'',
       rating:'5',

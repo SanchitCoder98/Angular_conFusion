@@ -34,6 +34,7 @@ import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+import { FeedbackService } from './services/feedback.service';
 
 import { MenuComponent } from './menu/menu.component';
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
@@ -82,7 +83,7 @@ import { LoginComponent } from './login/login.component';
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
   providers: [ 
-    DishService, PromotionService, LeaderService, ProcessHTTPMsgService,
+    DishService, PromotionService, LeaderService, ProcessHTTPMsgService, FeedbackService,
     {provide: 'BaseURL', useValue: baseURL}
    ],
   entryComponents: [
